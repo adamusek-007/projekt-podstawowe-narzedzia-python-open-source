@@ -1,5 +1,6 @@
 class Config:
-    """Klasa zawierająca konfiguracje połączenia do serwera."""
+    """Class containing configuration of the connection to the server"""
+
     def __init__(
         self,
         imap_server_address,
