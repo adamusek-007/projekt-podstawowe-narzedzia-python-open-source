@@ -5,7 +5,8 @@ from flask import render_template_string
 from flask import render_template
 from flask import request
 import threading
-from project.console_configurator import ConsoleConfigurator
+from console_configurator import ConsoleConfigurator
+from configuration_way import ConfigurationWay
 
 # Choose from user that either he want to supply programm by console or by the web
 
@@ -61,19 +62,12 @@ def run_flask():
 
 
 if __name__ == "__main__":
-    choice = (
-        input(
-            "Wybierz jak chciałbyś obsługiwać aplikację: \n konsola (1) \n przegladarka (2)"
-        )
-        .strip()
-        .lower()
-    )
-    if choice == "1":
-        configurator = ConsoleConfigurator()
-        config = configurator.create_config()
-    elif choice == "2":
+    config_way = ConfigurationWay()
+    config_way.get_configuration_method()
+    if config_way.choice == "1":
+        console_configurator = ConsoleConfigurator()
+        config = console_configurator.create_config()
+    elif config_way.choice == "2":
         print("Starting web interface on http://localhost:5000...")
         threading.Thread(target=run_flask, daemon=True).start()
         input("Press Enter to stop the web server...")
-    else:
-        print("Proszę wybierz z dostępnych opcji. (1 lub 2)")
