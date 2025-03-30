@@ -1,6 +1,6 @@
 """Konfigurator parametrów połączenia z wykorzystaniem konsoli oraz zawierający funkcję Config z wprowadzonymi danymi."""
 
-from Config import Config
+from config import Config
 
 
 class ConsoleConfigurator:
