@@ -8,7 +8,7 @@ import threading
 from console_configurator import ConsoleConfigurator
 from configuration_way import ConfigurationWay
 from email_address_exporter import EmailAddressExporter
-
+from config import Config
 app = Flask(__name__)
 
 
