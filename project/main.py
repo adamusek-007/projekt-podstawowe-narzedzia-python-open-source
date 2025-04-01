@@ -17,15 +17,17 @@ web_gui = Flask(__name__)
 def configure():
     """Display configuration site, and on POST colletcts data"""
     if request.method == "POST":
-        config = Config(
+        mailbox_config = Config(
             imap_server_address=request.form["imap_server_address"],
             imap_email_username=request.form["imap_email_username"],
             imap_email_password=request.form["imap_email_password"],
             imap_port=int(request.form["imap_port"]),
             output_csv_filename=request.form["output_csv_filename"],
         )
-        return "Konfiguracja zapisana! Możesz zamknąć tę stronę."
-        exporter_thread = Thread(target=run_email_exporter, args=(config,))
+        # return "Konfiguracja zapisana! Możesz zamknąć tę stronę."
+        exporter_thread = threading.Thread(
+            target=run_email_exporter, args=(mailbox_config,)
+        )
         exporter_thread.start()
     return render_template("configuration-site.html")
 
@@ -35,8 +37,9 @@ def run_flask():
     web_gui.run(host="0.0.0.0", port=5000, debug=False)
 
 
-def run_email_exporter(config):
-    exporter = EmailAddressExporter(config)
+def run_email_exporter(mail_config):
+    """Runs email exporter"""
+    exporter = EmailAddressExporter(mail_config)
 
 
 if __name__ == "__main__":
