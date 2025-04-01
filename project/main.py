@@ -42,11 +42,11 @@ def run_email_exporter(config):
 if __name__ == "__main__":
     operating_way = OperatingWay()
     operating_way.get_operating_way_from_user()
-    if operating_way.choice == "1":
+    if operating_way.choice == "console":
         console_configurator = ConsoleConfigurator()
         config = console_configurator.create_config()
-        ConsoleEmailAddressExporter(config)
-    elif operating_way.choice == "2":
+        # ConsoleEmailAddressExporter(config)
+    elif operating_way.choice == "web":
         print("Starting web interface on http://localhost:5000...")
         threading.Thread(target=run_flask, daemon=True).start()
         input("Press Enter to stop the web server...")
