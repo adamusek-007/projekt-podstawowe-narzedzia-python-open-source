@@ -1,9 +1,9 @@
-class ConfigurationWay:
+class OperatingWay:
 
     def __init__(self):
         self.choice = None
 
-    def get_configuration_method(self):
+    def get_operating_way_from_user(self):
         """Gets configuration method from user"""
         while self.choice not in ("1", "2"):
             self.choice = input(
