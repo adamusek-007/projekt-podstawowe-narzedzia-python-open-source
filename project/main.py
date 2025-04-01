@@ -1,14 +1,16 @@
 """This is the main class of this programm"""
 
+import threading
+
 from flask import Flask
 from flask import render_template_string
 from flask import render_template
 from flask import request
-import threading
 from console_configurator import ConsoleConfigurator
-from configuration_way import ConfigurationWay
+from configuration_way import OperatingWay
 from email_address_exporter import EmailAddressExporter
 from config import Config
+
 app = Flask(__name__)
 
 
@@ -35,12 +37,12 @@ def run_flask():
 
 
 if __name__ == "__main__":
-    config_way = ConfigurationWay()
-    config_way.get_configuration_method()
-    if config_way.choice == "1":
+    operating_way = OperatingWay()
+    operating_way.get_operating_way_from_user()
+    if operating_way.choice == "1":
         console_configurator = ConsoleConfigurator()
         config = console_configurator.create_config()
-    elif config_way.choice == "2":
+    elif operating_way.choice == "2":
         print("Starting web interface on http://localhost:5000...")
         threading.Thread(target=run_flask, daemon=True).start()
         input("Press Enter to stop the web server...")
